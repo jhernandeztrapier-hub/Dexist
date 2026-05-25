@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dexist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#f9f6f0;
+  --bg2:#f1ece2;
+  --bg3:#e8e0d2;
+  --ink:#1c1a16;
+  --ink2:#4a4540;
+  --ink3:#8c8278;
+  --ink4:#b8b0a4;
+  --red:#c45e00;
+  --red2:#e06b00;
+  --rule:rgba(28,26,22,0.14);
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'IM Fell English',Georgia,serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:18px;
+  line-height:1.72;
+  cursor:default;
+}
+::selection{background:var(--red);color:var(--bg);}
+img,svg{display:block;}
+
+a{color:inherit;text-decoration:none;}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--ink);
+  padding:14px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-word{
+  font-family:'IM Fell English SC',Georgia,serif;
+  font-size:17px;letter-spacing:0.06em;
+  color:var(--bg);
+}
+.nav-links{
+  display:flex;gap:36px;list-style:none;
+}
+.nav-links a{
+  font-family:'Inconsolata',monospace;
+  font-size:11px;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(249,246,240,0.38);transition:color 0.18s;
+}
+.nav-links a:hover{color:rgba(249,246,240,0.85);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;
+  background:var(--ink);
+  color:var(--bg);
+  padding:80px 48px 64px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  position:relative;
+  overflow:hidden;
+}
+.hero-top{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+.hero-kicker{
+  font-family:'Inconsolata',monospace;
+  font-size:11px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--red2);margin-bottom:28px;
+}
+.hero-h{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:clamp(80px,14vw,200px);
+  font-weight:400;font-style:italic;
+  line-height:0.88;
+  letter-spacing:-0.01em;
+  color:var(--bg);
+  margin-bottom:0;
+}
+.hero-h-sub{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:clamp(16px,2.2vw,26px);
+  font-weight:400;font-style:italic;
+  color:rgba(249,246,240,0.38);
+  margin-top:20px;
+  max-width:720px;
+  line-height:1.5;
+}
+.hero-bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:40px;
+  margin-top:60px;
+}
+.hero-def{
+  font-size:17px;font-style:italic;
+  color:rgba(249,246,240,0.62);
+  line-height:1.68;
+}
+.hero-def strong{
+  display:block;
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--red2);font-style:normal;font-weight:400;
+  margin-bottom:10px;
+}
+.hero-stats{
+  display:flex;flex-direction:column;justify-content:flex-end;gap:20px;
+}
+.hero-stat{
+  display:flex;align-items:baseline;gap:12px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  padding-bottom:16px;
+}
+.hero-stat:last-child{border-bottom:none;padding-bottom:0;}
+.stat-n{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:36px;font-style:italic;
+  color:rgba(249,246,240,0.85);line-height:1;min-width:72px;
+}
+.stat-l{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(249,246,240,0.28);
+}
+
+/* ── SHARED ── */
+.wrap{max-width:1140px;margin:0 auto;padding:96px 48px;}
+.sec-head{
+  display:flex;align-items:center;gap:18px;
+  margin-bottom:64px;
+}
+.sec-num{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--ink4);
+  border:1px solid var(--rule);
+  padding:4px 9px;
+}
+.sec-rule{flex:1;height:1px;background:var(--rule);}
+
+/* ── OPENING STATEMENT ── */
+.opening{
+  background:var(--red);
+  color:var(--bg);
+}
+.opening .wrap{padding:80px 48px;}
+.opening-body{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:clamp(22px,3vw,38px);
+  font-weight:400;font-style:italic;
+  line-height:1.42;
+  max-width:860px;
+}
+.opening-body em{color:rgba(249,246,240,0.42);font-style:normal;}
+.opening-rule{
+  width:48px;height:1px;
+  background:rgba(249,246,240,0.3);
+  margin:44px 0;
+}
+.opening-note{
+  font-size:16px;font-style:italic;
+  color:rgba(249,246,240,0.55);
+  max-width:580px;line-height:1.65;
+}
+
+/* ── CONCEPTS ── */
+.concepts-list{
+  display:flex;flex-direction:column;gap:0;
+}
+.concept-row{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:60px;
+  padding:40px 0;
+  border-top:1px solid var(--rule);
+  align-items:start;
+}
+.concept-row:last-child{border-bottom:1px solid var(--rule);}
+.concept-term{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:21px;font-style:italic;
+  color:var(--ink);line-height:1.3;
+  padding-top:2px;
+}
+.concept-term small{
+  display:block;
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--red);font-style:normal;
+  margin-bottom:6px;
+}
+.concept-body{
+  font-size:16px;color:var(--ink2);line-height:1.75;
+}
+
+/* ── TENSION ── */
+.tensions-section{background:var(--bg2);}
+.tension-rows{display:flex;flex-direction:column;}
+.tension-row{
+  display:grid;
+  grid-template-columns:40px 1fr 1fr;
+  gap:48px;
+  padding:44px 0;
+  border-top:1px solid var(--rule);
+  align-items:start;
+}
+.t-idx{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:32px;font-style:italic;
+  color:var(--ink4);line-height:1;
+  padding-top:4px;
+}
+.t-q{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:19px;font-style:italic;
+  color:var(--ink);line-height:1.45;
+}
+.t-a{
+  font-size:15px;color:var(--ink3);line-height:1.78;
+  border-left:2px solid var(--red);
+  padding-left:18px;
+}
+
+/* ── LINEAGE ── */
+.lineage-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border-top:1px solid var(--rule);
+  border-left:1px solid var(--rule);
+}
+.lineage-card{
+  padding:36px 32px;
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.lin-who{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--red);margin-bottom:10px;
+}
+.lin-title{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:19px;font-style:italic;
+  color:var(--ink);margin-bottom:12px;line-height:1.3;
+}
+.lin-body{font-size:14px;color:var(--ink3);line-height:1.75;}
+
+/* ── BLOCKQUOTE ── */
+.bq-section{
+  background:var(--ink);color:var(--bg);
+}
+.bq-section .wrap{padding:80px 48px;}
+blockquote{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:clamp(22px,3.2vw,38px);
+  font-style:italic;font-weight:400;
+  line-height:1.42;
+  max-width:820px;
+  color:rgba(249,246,240,0.88);
+  position:relative;
+  padding-left:32px;
+  border-left:3px solid var(--red2);
+}
+blockquote cite{
+  display:block;margin-top:22px;
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(249,246,240,0.28);font-style:normal;
+}
+
+/* ── GLOSSARY ── */
+.glos-section{background:var(--bg2);}
+.glos-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;
+  border-top:1px solid var(--rule);
+  border-left:1px solid var(--rule);
+}
+.glos-item{
+  padding:28px 24px;
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.glos-term{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:17px;font-style:italic;
+  color:var(--ink);margin-bottom:8px;
+}
+.glos-def{font-size:13px;color:var(--ink3);line-height:1.72;}
+
+/* ── READING ── */
+.reading-cols{
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;
+}
+.r-col-head{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:24px;
+  padding-bottom:12px;border-bottom:1px solid var(--rule);
+}
+.r-list{list-style:none;display:flex;flex-direction:column;}
+.r-item{
+  padding:14px 0;border-bottom:1px solid var(--rule);
+}
+.r-item:last-child{border-bottom:none;}
+.r-auth{
+  font-family:'Inconsolata',monospace;font-size:10px;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--red);
+}
+.r-title{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:16px;font-style:italic;color:var(--ink);
+  margin:2px 0;
+}
+.r-note{font-size:12px;color:var(--ink4);}
+
+/* ── ROADMAP ── */
+.road-section{background:var(--bg2);}
+.road-list{display:flex;flex-direction:column;}
+.road-item{
+  display:grid;
+  grid-template-columns:160px 200px 1fr;
+  gap:40px;
+  padding:32px 0;
+  border-top:1px solid var(--rule);
+  align-items:start;
+}
+.road-phase{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--red);padding-top:3px;
+}
+.road-title{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:19px;font-style:italic;color:var(--ink);
+  line-height:1.3;
+}
+.road-goals{
+  list-style:none;display:flex;flex-direction:column;gap:6px;
+}
+.road-goals li{
+  font-size:14px;color:var(--ink3);line-height:1.5;
+  display:flex;gap:10px;align-items:baseline;
+}
+.road-goals li::before{
+  content:'—';
+  font-family:'Inconsolata',monospace;
+  font-size:11px;color:var(--ink4);flex-shrink:0;
+}
+
+/* ── ESSAYS ── */
+.essays-list{display:flex;flex-direction:column;}
+.essay-item{
+  display:grid;
+  grid-template-columns:100px 1fr;
+  gap:40px;
+  padding:32px 0;
+  border-top:1px solid var(--rule);
+  align-items:start;
+}
+.essay-phase{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);padding-top:4px;
+}
+.essay-q{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:18px;font-style:italic;color:var(--ink);
+  line-height:1.45;margin-bottom:6px;
+}
+.essay-note{font-size:13px;color:var(--ink4);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);
+  color:var(--bg);
+  padding:64px 48px 48px;
+}
+.footer-top{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding-bottom:36px;margin-bottom:36px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.f-title{
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:56px;font-style:italic;
+  color:var(--bg);line-height:1;
+}
+.f-desc{
+  font-size:14px;font-style:italic;
+  color:rgba(249,246,240,0.35);
+  max-width:400px;line-height:1.65;text-align:right;
+}
+.footer-bot{
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+.f-meta{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(249,246,240,0.18);line-height:2;
+}
+.f-right{
+  font-family:'Inconsolata',monospace;
+  font-size:10px;letter-spacing:0.1em;
+  color:rgba(249,246,240,0.1);text-align:right;
+}
+
+@media(max-width:860px){
+  nav{padding:14px 24px;}
+  .nav-links{display:none;}
+  .hero{padding:60px 24px 48px;}
+  .hero-bottom{grid-template-columns:1fr;gap:36px;}
+  .wrap{padding:64px 24px;}
+  .concept-row{grid-template-columns:1fr;gap:12px;}
+  .tension-row{grid-template-columns:40px 1fr;gap:24px;}
+  .tension-row .t-a{grid-column:1/-1;padding-left:18px;}
+  .lineage-grid{grid-template-columns:1fr;}
+  .glos-grid{grid-template-columns:1fr;}
+  .reading-cols{grid-template-columns:1fr;gap:48px;}
+  .road-item{grid-template-columns:1fr;gap:12px;}
+  .essay-item{grid-template-columns:80px 1fr;gap:20px;}
+  .footer-top{flex-direction:column;align-items:flex-start;gap:20px;}
+  .f-desc{text-align:left;}
+  .footer-bot{flex-direction:column;align-items:flex-start;gap:12px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-word">Dexist</span>
+  <ul class="nav-links">
+    <li><a href="#concepts">Concepts</a></li>
+    <li><a href="#tensions">Tensions</a></li>
+    <li><a href="#lineage">Lineage</a></li>
+    <li><a href="#reading">Reading</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-kicker">Independent research project · philosophy of selfhood · est. 2025</div>
+    <h1 class="hero-h">Dexist</h1>
+    <p class="hero-h-sub">Toward a philosophy of conscious existence in the age of performative identity</p>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-def">
+      <strong>To dexist, v.</strong>
+      To consciously step out of unconscious social performance and into deliberate, honest existence — not through isolation or rejection, but through the radical act of noticing what you have been doing all along.
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-n">8–12</span>
+        <span class="stat-l">month research program</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-n">5</span>
+        <span class="stat-l">disciplines integrated</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-n">20k+</span>
+        <span class="stat-l">word primary paper</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPENING -->
+<section class="opening">
+  <div class="wrap">
+    <p class="opening-body">Most people most of the time are <em>not fully present in their own lives.</em> They are managing impressions, monitoring reactions, calibrating self-presentation. This is not dishonesty in the ordinary sense. It is something more foundational — a habituated orientation toward the social gaze that operates largely beneath conscious deliberation.</p>
+    <div class="opening-rule"></div>
+    <p class="opening-note">The digital revolution did not create this tendency. It industrialized it. The question is not whether this is happening. The question is whether anyone notices — and whether noticing is enough.</p>
+  </div>
+</section>
+
+<!-- CONCEPTS -->
+<section id="concepts">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01 — concepts</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="concepts-list">
+      <div class="concept-row">
+        <div class="concept-term"><small>concept 01</small>The performance layer</div>
+        <div class="concept-body">The default mode of social existence in which identity is constituted through and for external evaluation. Its hallmark: the individual's primary concern in any social interaction is legibility and approval — not genuine expression, not honest connection. This is not a choice. It is a habituated orientation, and its most important feature is that it largely cannot be seen from inside it.</div>
+      </div>
+      <div class="concept-row">
+        <div class="concept-term"><small>concept 02</small>The dexist threshold</div>
+        <div class="concept-body">The moment of perceptual shift in which unconscious performance becomes visible to the performer. Triggered by friction, solitude, creative encounter, or honest reflection. Not enlightenment. Not permanent. A window. What happens next is not guaranteed — the window can close as quickly as it opened. But nothing changes without it.</div>
+      </div>
+      <div class="concept-row">
+        <div class="concept-term"><small>concept 03</small>Conscious existence</div>
+        <div class="concept-body">Not the absence of social presentation — which is impossible and probably undesirable. The presence of reflective alignment between inner experience and outer expression. More present: to yourself, to others, to the choices you are actually making. This is a spectrum, not a destination. The claim is modest but real.</div>
+      </div>
+      <div class="concept-row">
+        <div class="concept-term"><small>concept 04</small>Validation dependence</div>
+        <div class="concept-body">Caring what others think is healthy. This is something else: the structural condition in which identity stability is contingent on external positive feedback. In digital life it maps directly onto compulsive posting, metric-monitoring, self-presentation calibrated to maximize engagement — not to express, but to be approved of.</div>
+      </div>
+      <div class="concept-row">
+        <div class="concept-term"><small>concept 05</small>Performative authenticity</div>
+        <div class="concept-body">The most common failure mode of every authenticity framework — including this one. The condition in which refusing to perform is itself performed. Curated rawness. Conspicuous non-conformity. A different audience, a different set of approval criteria — the same underlying structure. Dexist must be rigorous about this trap precisely because it will not be immune to it.</div>
+      </div>
+      <div class="concept-row">
+        <div class="concept-term"><small>concept 06</small>The algorithmic mirror</div>
+        <div class="concept-body">Platforms don't reflect you. They form you. Feedback systems engineered to maximize engagement train users toward versions of themselves that are maximally appealing, maximally legible, maximally consumable to others. This is qualitatively new — distinct from peer pressure or social conformity in kind, not just degree. And it is experienced not as compulsion, but as freedom.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TENSIONS -->
+<section id="tensions" class="tensions-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02 — internal tensions</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="tension-rows">
+      <div class="tension-row">
+        <div class="t-idx">i.</div>
+        <div class="t-q">Does a real self exist to step back into — or is the self performance all the way down?</div>
+        <div class="t-a">Dexist does not require a metaphysically fixed self. It requires only that differences exist between values one would endorse upon genuine reflection and those one acts from under social pressure. These differences are real even if the self is not a substance. The target is not a hidden true self — it is a more honest relationship between reflection and action.</div>
+      </div>
+      <div class="tension-row">
+        <div class="t-idx">ii.</div>
+        <div class="t-q">Can conscious reflection escape its own social formation — or does stepping out use the very tools of the layer it is stepping out of?</div>
+        <div class="t-a">This constraint is adopted explicitly. Conscious existence does not mean self-transparency. It means a more examined relationship with one's own performances — more deliberate, more aligned with reflected values. A more examined life, not a fully transparent one. That distinction is real and significant even if it is modest.</div>
+      </div>
+      <div class="tension-row">
+        <div class="t-idx">iii.</div>
+        <div class="t-q">Is conscious withdrawal from performance equally available to everyone — or is dexisting a structural privilege?</div>
+        <div class="t-a">This objection is taken seriously rather than explained away. For many people, social performance is not neurotic self-management — it is necessary survival strategy. Code-switching across power differentials is rational, not pathological. Dexist distinguishes protective performance from approval-driven performance, and limits its prescriptions accordingly. It does not moralize at people who perform to survive.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINEAGE -->
+<section id="lineage">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03 — intellectual lineage</span>
+      <span class="sec-rule"></span>
+    </div>
+    <p style="font-size:17px;font-style:italic;color:var(--ink2);max-width:640px;margin-bottom:48px;line-height:1.65;">Dexist does not emerge from nowhere. Any serious philosophical framework owes debts, and intellectual honesty requires identifying them — and naming honestly where they end.</p>
+    <div class="lineage-grid">
+      <div class="lineage-card">
+        <div class="lin-who">Sartre · 1943</div>
+        <div class="lin-title">Bad faith & the complicit self</div>
+        <div class="lin-body">The refusal to examine one's own complicity in self-deception is itself an act. Unconscious performance is not simply something that happens to people — it is something they participate in and maintain. Dexist inherits this diagnostic force while rejecting Sartre's maximalist account of radical freedom.</div>
+      </div>
+      <div class="lineage-card">
+        <div class="lin-who">Goffman · 1959</div>
+        <div class="lin-title">The dramaturgical challenge</div>
+        <div class="lin-body">If all social behavior is inherently performative, the distinction Dexist draws collapses. The response: not performance vs. non-performance, but performance that is conscious and examined versus performance that is habituated and approval-driven. Goffman maps the structure. Dexist asks what, if anything, can be done within it.</div>
+      </div>
+      <div class="lineage-card">
+        <div class="lin-who">Heidegger · 1927</div>
+        <div class="lin-title">The They-self & fallenness</div>
+        <div class="lin-body">The das Man — anonymous social consensus — determines how most people understand themselves. Dexist agrees with the diagnosis and differs in mechanism: dexisting does not require confrontation with mortality. The disruption is simpler — the act of noticing. That is more accessible and philosophically less powerful. Both things are true.</div>
+      </div>
+      <div class="lineage-card">
+        <div class="lin-who">Winnicott · 1960</div>
+        <div class="lin-title">True self, false self</div>
+        <div class="lin-body">For individuals with anxious attachment, the false self is not a habit — it is a psychological structure built in early relational experience. For these people, dexisting may not be primarily a philosophical project but a relational and therapeutic one. The framework acknowledges this rather than obscuring it.</div>
+      </div>
+      <div class="lineage-card">
+        <div class="lin-who">Taylor · 1991</div>
+        <div class="lin-title">Against corrupted authenticity</div>
+        <div class="lin-body">A framework that says "just be yourself" without specifying what self-knowledge requires is therapy-speak with footnotes. Taylor's critique of soft authenticity is exactly the failure mode Dexist must avoid — and must keep checking itself against.</div>
+      </div>
+      <div class="lineage-card">
+        <div class="lin-who">Han · 2010–2012</div>
+        <div class="lin-title">Transparency, burnout & the achieved self</div>
+        <div class="lin-body">The demand for visibility is not experienced as compulsion — it is experienced as freedom. The person who posts constantly does not feel coerced; they feel expressive. This is the deepest level at which the performance layer operates. Dexist must have a response to it or admit it does not.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCKQUOTE -->
+<section class="bq-section">
+  <div class="wrap">
+    <blockquote>
+      "A framework that cannot name its own contradictions is not a framework. It is a belief system. Dexist holds three genuine tensions and refuses to paper over them."
+      <cite>Project statement · Dexist v1.0</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="glossary" class="glos-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04 — terminology</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="glos-grid">
+      <div class="glos-item">
+        <div class="glos-term">The performance layer</div>
+        <div class="glos-def">The default mode of social existence in which identity is oriented primarily toward external evaluation. Not a conscious strategy — a habituated orientation. Largely invisible from inside it.</div>
+      </div>
+      <div class="glos-item">
+        <div class="glos-term">The dexist threshold</div>
+        <div class="glos-def">The moment of perceptual shift in which unconscious social performance becomes visible to the performer. A necessary precondition for change. Not the change itself.</div>
+      </div>
+      <div class="glos-item">
+        <div class="glos-term">Conscious existence</div>
+        <div class="glos-def">Greater reflective alignment between inner experience and outer expression. Not self-transparency — a more examined relationship with one's performances. The difference between these matters.</div>
+      </div>
+      <div class="glos-item">
+        <div class="glos-term">Validation dependence</div>
+        <div class="glos-def">The structural condition in which identity stability is contingent on external positive feedback. Distinct from ordinary, healthy social responsiveness in kind, not just degree.</div>
+      </div>
+      <div class="glos-item">
+        <div class="glos-term">Performative authenticity</div>
+        <div class="glos-def">The refusal of performance, performed. A substitution of one approval structure for another without genuine reflection. The most common failure mode of authenticity frameworks.</div>
+      </div>
+      <div class="glos-item">
+        <div class="glos-term">The algorithmic mirror</div>
+        <div class="glos-def">The feedback mechanism of social media platforms that shapes identity-expression toward forms that maximize engagement. Does not reflect the self — forms it.</div>
+      </div>
+      <div class="glos-item">
+        <div class="glos-term">The hollow community problem</div>
+        <div class="glos-def">Structural loneliness produced when interaction is ubiquitous but genuine contact — which requires vulnerability and honest exposure — is structurally unavailable.</div>
+      </div>
+      <div class="glos-item">
+        <div class="glos-term">Protective performance</div>
+        <div class="glos-def">Adaptive social behavior in structurally unequal contexts — code-switching, strategic self-presentation — that the Dexist framework explicitly does not target.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- READING -->
+<section id="reading">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05 — reading list</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="reading-cols">
+      <div>
+        <div class="r-col-head">Philosophy &amp; cultural theory</div>
+        <ul class="r-list">
+          <li class="r-item"><div class="r-auth">Sartre</div><div class="r-title">Being and Nothingness</div><div class="r-note">Bad faith; existence preceding essence</div></li>
+          <li class="r-item"><div class="r-auth">Heidegger</div><div class="r-title">Being and Time</div><div class="r-note">Authenticity; the They-self; fallenness</div></li>
+          <li class="r-item"><div class="r-auth">Taylor</div><div class="r-title">The Ethics of Authenticity</div><div class="r-note">Against the corruption of the ideal</div></li>
+          <li class="r-item"><div class="r-auth">Han</div><div class="r-title">The Burnout Society</div><div class="r-note">Self-exploitation; the achievement subject</div></li>
+          <li class="r-item"><div class="r-auth">Han</div><div class="r-title">The Transparency Society</div><div class="r-note">Visibility culture; collapse of private selfhood</div></li>
+          <li class="r-item"><div class="r-auth">Debord</div><div class="r-title">The Society of the Spectacle</div><div class="r-note">Lived experience replaced by its representation</div></li>
+          <li class="r-item"><div class="r-auth">Butler</div><div class="r-title">Gender Trouble</div><div class="r-note">Performativity; identity constituted through performance</div></li>
+          <li class="r-item"><div class="r-auth">Foucault</div><div class="r-title">Technologies of the Self</div><div class="r-note">Self-forming practices; subject formation</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="r-col-head">Psychology, sociology &amp; digital culture</div>
+        <ul class="r-list">
+          <li class="r-item"><div class="r-auth">Goffman</div><div class="r-title">The Presentation of Self in Everyday Life</div><div class="r-note">Dramaturgical sociology; frontstage and backstage</div></li>
+          <li class="r-item"><div class="r-auth">Bauman</div><div class="r-title">Liquid Modernity</div><div class="r-note">Identity without stable anchors</div></li>
+          <li class="r-item"><div class="r-auth">Turkle</div><div class="r-title">Alone Together</div><div class="r-note">Digital connection; the preference for edited selves</div></li>
+          <li class="r-item"><div class="r-auth">Deci &amp; Ryan</div><div class="r-title">Self-Determination Theory</div><div class="r-note">Autonomy; intrinsic vs. external motivation</div></li>
+          <li class="r-item"><div class="r-auth">Higgins</div><div class="r-title">Self-Discrepancy Theory (1987)</div><div class="r-note">Actual, ideal, and ought selves; psychological cost</div></li>
+          <li class="r-item"><div class="r-auth">Winnicott</div><div class="r-title">Ego Distortion in Terms of True and False Self</div><div class="r-note">Developmental origins of the performed self</div></li>
+          <li class="r-item"><div class="r-auth">Zuboff</div><div class="r-title">The Age of Surveillance Capitalism</div><div class="r-note">Behavioral modification at scale; platform architecture</div></li>
+          <li class="r-item"><div class="r-auth">Riesman</div><div class="r-title">The Lonely Crowd</div><div class="r-note">Other-directedness; inner- vs. outer-directed character</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="road-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">06 — research roadmap</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="road-list">
+      <div class="road-item">
+        <div class="road-phase">Phase one<br>Months 1–2</div>
+        <div class="road-title">Foundation</div>
+        <ul class="road-goals">
+          <li>Primary philosophical reading (Sartre, Heidegger, Taylor)</li>
+          <li>Psychology and sociology base texts</li>
+          <li>Framework draft 1.0 and terminology glossary</li>
+          <li>Annotated bibliography, 30–40 sources</li>
+          <li>Research journal begins</li>
+        </ul>
+      </div>
+      <div class="road-item">
+        <div class="road-phase">Phase two<br>Months 3–4</div>
+        <div class="road-title">Critical engagement</div>
+        <ul class="road-goals">
+          <li>Poststructuralist critique (Butler, Foucault)</li>
+          <li>Four critical essays, 3,000–5,000 words each</li>
+          <li>Framework revision 2.0</li>
+          <li>Privilege and accessibility analysis</li>
+          <li>Comparative mapping against existing frameworks</li>
+        </ul>
+      </div>
+      <div class="road-item">
+        <div class="road-phase">Phase three<br>Months 5–6</div>
+        <div class="road-title">Contemporary analysis</div>
+        <ul class="road-goals">
+          <li>Social media architecture as performance infrastructure</li>
+          <li>Influencer culture as institutionalized performative identity</li>
+          <li>Digital loneliness and the hollow community problem</li>
+          <li>Three analytical essays, 4,000–6,000 words each</li>
+        </ul>
+      </div>
+      <div class="road-item">
+        <div class="road-phase">Phase four<br>Months 7–8</div>
+        <div class="road-title">Synthesis</div>
+        <ul class="road-goals">
+          <li>Primary research paper, 15,000–25,000 words</li>
+          <li>Framework version 3.0 — final precise statement</li>
+          <li>Conceptual diagrams and visual representations</li>
+          <li>Complete citation database and bibliography</li>
+        </ul>
+      </div>
+      <div class="road-item">
+        <div class="road-phase">Phase five<br>Months 9–12</div>
+        <div class="road-title">Refinement &amp; publication</div>
+        <ul class="road-goals">
+          <li>Revision of primary paper</li>
+          <li>Presentation materials for academic and public formats</li>
+          <li>Submission to undergraduate philosophy journals</li>
+          <li>Website and public research archive</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESSAYS -->
+<section id="essays">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">07 — essay topics</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="essays-list">
+      <div class="essay-item">
+        <div class="essay-phase">Phase one</div>
+        <div>
+          <div class="essay-q">Goffman's dramaturgical model describes the structure of social interaction. Does it also describe its moral failure?</div>
+          <div class="essay-note">Whether descriptive sociology carries normative implications — and what Dexist can take from it</div>
+        </div>
+      </div>
+      <div class="essay-item">
+        <div class="essay-phase">Phase one</div>
+        <div>
+          <div class="essay-q">The Heideggerian authentic existence and the Dexist conscious existence: a precise comparison</div>
+          <div class="essay-note">Where they agree, where they differ, and whether the differences are substantive or terminological</div>
+        </div>
+      </div>
+      <div class="essay-item">
+        <div class="essay-phase">Phase two</div>
+        <div>
+          <div class="essay-q">Is there a self behind the performance? The poststructuralist challenge to Dexist</div>
+          <div class="essay-note">Engaging Butler and Foucault honestly — and assessing whether the framework survives</div>
+        </div>
+      </div>
+      <div class="essay-item">
+        <div class="essay-phase">Phase two</div>
+        <div>
+          <div class="essay-q">The privilege of stepping out: who has access to dexisting, and who doesn't?</div>
+          <div class="essay-note">Structural conditions of conscious existence — race, class, gender, institutional power</div>
+        </div>
+      </div>
+      <div class="essay-item">
+        <div class="essay-phase">Phase two</div>
+        <div>
+          <div class="essay-q">Performative authenticity: when refusing to perform becomes a performance</div>
+          <div class="essay-note">The trap at the center of every authenticity framework, including this one</div>
+        </div>
+      </div>
+      <div class="essay-item">
+        <div class="essay-phase">Phase three</div>
+        <div>
+          <div class="essay-q">The influencer as the terminus of the performance layer</div>
+          <div class="essay-note">Institutionalized performative identity — Dexist alongside Debord's spectacle theory</div>
+        </div>
+      </div>
+      <div class="essay-item">
+        <div class="essay-phase">Phase three</div>
+        <div>
+          <div class="essay-q">Algorithmic mirrors: how platform architecture constitutes rather than reflects performative identity</div>
+          <div class="essay-note">Social media feedback systems and their identity-forming function</div>
+        </div>
+      </div>
+      <div class="essay-item">
+        <div class="essay-phase">Synthesis</div>
+        <div>
+          <div class="essay-q">Dexist: its contributions, its limits, and the questions it cannot answer</div>
+          <div class="essay-note">A full critical assessment of the framework — honest about what it has and has not established</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="f-title">Dexist</div>
+    <div class="f-desc">An independent interdisciplinary research project on conscious existence, performative identity, and what it means to live honestly when everything — including honesty — has become content.</div>
+  </div>
+  <div class="footer-bot">
+    <div class="f-meta">
+      Philosophy · Psychology · Sociology · Media Studies<br>
+      Independent research · 8–12 months · 20,000+ word paper<br>
+      Version 1.0 · 2025–2026
+    </div>
+    <div class="f-right">Built for the Dexist Project</div>
+  </div>
+</footer>
+
+</body>
+</html>
